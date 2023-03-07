@@ -1,0 +1,14 @@
+[package]
+name = "assemble"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0"
+clap = { version = "4.0", features = ["derive"] }
+indicatif = { version = "0.17" }
+tokio = { version = "1.21", features = ["rt", "rt-multi-thread", "macros"] }
+
+retrieve = { version = "0.1", path = "../retrieve" }
+storage = { version = "0.1", path = "../storage" }
+schema = { version = "0.1", path = "../schema" }

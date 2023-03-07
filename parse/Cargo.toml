@@ -1,0 +1,18 @@
+[package]
+name = "parse"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0"
+calamine = { version = "0.19", features = ["dates"] }
+chrono = { version = "0.4", features = ["serde"] }
+csv = "1.1"
+glob = "0.3"
+indicatif = { version = "0.17" }
+serde = { version = "1.0", features = ["derive"] }
+zip = { version = "0.6", default-features = false, features = ["deflate", "bzip2"] }
+
+schema = { version = "0.1", path = "../schema" }

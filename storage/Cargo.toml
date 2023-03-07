@@ -1,0 +1,10 @@
+[package]
+name = "storage"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+indicatif = { version = "0.17" }
+rusqlite = { version = "0.28.0", features = ["backup"] }
+
+storage_derive = { version = "0.1", path = "../storage_derive" }
