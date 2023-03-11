@@ -55,7 +55,7 @@ ENV SQLITE3_STATIC=1 \
     SQLITE3_INCLUDE_DIR=/usr/local/include \
     SQLITE3_LIB_DIR=/usr/local/lib
 
-ARG RUST_VERSION=1.67.0
+ARG RUST_VERSION=1.68.0
 
 RUN case $TARGETPLATFORM in \
          "linux/arm64") LLVM_TARGET=aarch64-unknown-linux-musl ;; \
@@ -71,12 +71,6 @@ RUN case $TARGETPLATFORM in \
 
 ENV PATH "/root/.cargo/bin:${PATH}"
 
-RUN cargo new foo && \
-    cd foo && \
-    cargo add libc && \
-    cd .. && \
-    rm -r foo
-
 WORKDIR /root/src
 
 ENV CC_x86_64_unknown_linux_musl=clang-$LLVM_VERSION \
@@ -85,7 +79,8 @@ ENV CC_x86_64_unknown_linux_musl=clang-$LLVM_VERSION \
     AR_aarch64_unknown_linux_musl=llvm-ar-$LLVM_VERSION \
     CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_RUSTFLAGS="-L/usr/lib/x86_64-linux-musl -L/lib/x86_64-linux-musl -C linker=rust-lld" \
     CARGO_TARGET_AARCH64_UNKNOWN_LINUX_MUSL_RUSTFLAGS="-L/usr/lib/aarch64-linux-musl -L/lib/aarch64-linux-musl -C linker=rust-lld" \
-    CARGO_TARGET_AARCH64_UNKNOWN_LINUX_MUSL_RUNNER="qemu-aarch64 -L /usr/aarch64-linux-gnu"
+    CARGO_TARGET_AARCH64_UNKNOWN_LINUX_MUSL_RUNNER="qemu-aarch64 -L /usr/aarch64-linux-gnu" \
+    CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
 
 COPY . .
 
