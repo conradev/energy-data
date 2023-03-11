@@ -5,7 +5,7 @@ pub fn zip_code<'de, D>(deserializer: D) -> Result<Option<String>, D::Error>
 where
     D: Deserializer<'de>,
 {
-    Ok(Option::<String>::deserialize(deserializer)?.map(|s| format!("{:0>5}", s)))
+    Ok(Option::<String>::deserialize(deserializer)?.map(|s| format!("{s:0>5}")))
 }
 
 pub trait StreamLength: Seek {

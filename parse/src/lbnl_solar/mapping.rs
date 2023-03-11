@@ -41,8 +41,8 @@ pub struct InstallationDef {
 #[serde(transparent)]
 pub struct Mapping(#[serde(with = "InstallationDef")] Installation);
 
-impl Into<Installation> for Mapping {
-    fn into(self) -> Installation {
-        self.0
+impl From<Mapping> for Installation {
+    fn from(val: Mapping) -> Self {
+        val.0
     }
 }

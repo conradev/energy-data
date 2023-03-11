@@ -1,5 +1,5 @@
 use indicatif::{MultiProgress, ProgressBar, ProgressStyle};
-use rusqlite::{Connection, DatabaseName, Result};
+use rusqlite::{params, Connection, Result};
 use std::path::Path;
 
 use crate::Store;
@@ -15,8 +15,10 @@ impl Database {
         Ok(Database(Connection::open(path)?))
     }
 
-    pub fn backup<P: AsRef<Path>>(&self, path: P) -> Result<()> {
-        self.0.backup(DatabaseName::Main, path, None)
+    pub fn vacuum_into<P: AsRef<Path>>(&self, path: P) -> Result<()> {
+        self.0
+            .execute("VACUUM INTO ?", params![path.as_ref().to_str()])?;
+        Ok(())
     }
 
     pub fn initialize<R: Store>(&mut self) -> Result<()> {

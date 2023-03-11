@@ -1,7 +1,7 @@
 use anyhow::Result;
 use async_trait::async_trait;
-use futures::io::AsyncReadExt;
-use futures::stream::{self, TryStreamExt};
+
+use futures::stream::{TryStreamExt};
 use indicatif::{MultiProgress, ProgressBar, ProgressStyle};
 use tokio::io;
 use tokio_util::compat::FuturesAsyncReadCompatExt;

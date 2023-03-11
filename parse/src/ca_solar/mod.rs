@@ -1,8 +1,8 @@
 use anyhow::Result;
 use glob::Pattern;
 use indicatif::{MultiProgress, ProgressBar, ProgressStyle};
-use std::io::{Cursor, Read, Seek};
-use std::ops::Mul;
+use std::io::{Read, Seek};
+
 
 use crate::util::StreamLength;
 
@@ -68,7 +68,7 @@ mod tests {
             recieved_date: NaiveDate::from_ymd_opt(2011, 3, 8),
             complete_date: None,
             approved_date: NaiveDate::from_ymd_opt(2011, 7, 25),
-            system_size_dc: 4.081632653,
+            system_size_dc: 4.081_632_6,
             system_size_ac: 4.0,
             installer: Some(String::from("REC SOLAR")),
             utility: String::from("SCE"),

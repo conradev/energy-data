@@ -24,7 +24,7 @@ where
     {
         use calamine::Reader;
 
-        let progress = progress.unwrap_or_else(|| ProgressBar::hidden());
+        let progress = progress.unwrap_or_else(ProgressBar::hidden);
         progress.set_style(ProgressStyle::with_template("{prefix}: {msg} {spinner}").unwrap());
         progress.set_message("Scanning Workbook");
 
@@ -60,8 +60,7 @@ where
         Ok(DataType::Float(v)) => v,
         Ok(v) => {
             return Err(serde::de::Error::custom(format!(
-                "Invalid Excel data type for date {:?}",
-                v
+                "Invalid Excel data type for date {v:?}"
             )))
         }
         Err(e) => return Err(e),

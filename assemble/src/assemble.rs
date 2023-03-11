@@ -1,8 +1,8 @@
 use anyhow::Result;
-use indicatif::{MultiProgress, ProgressBar};
+use indicatif::{MultiProgress};
 use retrieve::Retrieve;
-use std::ops::Mul;
-use storage::{Database, Store};
+
+use storage::{Store};
 
 pub async fn assemble_into<R>(db: &mut storage::Database, progress: MultiProgress) -> Result<()>
 where

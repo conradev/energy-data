@@ -1,12 +1,12 @@
 use crate::eia::mapping::ParsedUtility;
 use anyhow::Result;
 use calamine::Reader;
-use glob::{glob, Pattern};
+use glob::{Pattern};
 use indicatif::{MultiProgress, ProgressBar, ProgressStyle};
 use std::collections::HashMap;
-use std::io::{Cursor, Read, Seek, SeekFrom};
+use std::io::{Read, Seek};
 
-use crate::excel::ParseSheet;
+
 use crate::util::StreamLength;
 
 mod mapping;

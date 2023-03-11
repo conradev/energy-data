@@ -45,8 +45,8 @@ struct InstallationDef {
 #[serde(transparent)]
 pub struct SRPInstallation(#[serde(with = "InstallationDef")] Installation);
 
-impl Into<Installation> for SRPInstallation {
-    fn into(self) -> Installation {
-        self.0
+impl From<SRPInstallation> for Installation {
+    fn from(val: SRPInstallation) -> Self {
+        val.0
     }
 }

@@ -25,18 +25,18 @@ fn try_derive(input: DeriveInput) -> syn::Result<proc_macro2::TokenStream> {
     let schema = Schema::new(&attrs, input.data)?;
     let table_name = schema.table_name.as_str();
 
-    let schema_sql = format!("{}", schema);
+    let schema_sql = format!("{schema}");
     let upsert_sql = format!("{}", schema.upsert());
     let upsert = schema.upsert().implementation();
 
-    Ok(quote! {
+    let implementation = quote! {
         #[automatically_derived]
         impl Store for #type_name {
-            fn initialize(conn: &mut ::rusqlite::Connection) -> ::rusqlite::Result<()> {
+            fn initialize(conn: &mut ::storage::sqlite::Connection) -> ::storage::sqlite::Result<()> {
                 conn.execute_batch(#schema_sql)
             }
 
-            fn upsert_statement<'a>(conn: &'a ::rusqlite::Connection) -> ::rusqlite::Result<::rusqlite::Statement<'a>> {
+            fn upsert_statement<'a>(conn: &'a ::storage::sqlite::Connection) -> ::storage::sqlite::Result<::storage::sqlite::Statement<'a>> {
                 conn.prepare(#upsert_sql)
             }
 
@@ -44,6 +44,6 @@ fn try_derive(input: DeriveInput) -> syn::Result<proc_macro2::TokenStream> {
 
             const PROGRESS_NAME: &'static str = #table_name;
         }
-    }
-    .into())
+    };
+    Ok(implementation)
 }

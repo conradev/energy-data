@@ -20,8 +20,8 @@ pub struct UtilityDef {
 #[serde(transparent)]
 pub struct ParsedUtility(#[serde(with = "UtilityDef")] Utility);
 
-impl Into<Utility> for ParsedUtility {
-    fn into(self) -> Utility {
-        self.0
+impl From<ParsedUtility> for Utility {
+    fn from(val: ParsedUtility) -> Self {
+        val.0
     }
 }

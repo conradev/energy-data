@@ -1,8 +1,8 @@
 use anyhow::Result;
 use glob::Pattern;
 use indicatif::{MultiProgress, ProgressBar, ProgressStyle};
-use std::io::{Cursor, Read, Seek};
-use std::ops::Mul;
+use std::io::{Read, Seek};
+
 
 use crate::util::StreamLength;
 
@@ -59,7 +59,7 @@ mod tests {
     #[test]
     fn parse_lbnl_dataset() {
         let records = parse_file!(Parser, "out.csv");
-        println!("{:?}", records);
+        println!("{records:?}");
 
         let record = Installation {
             data_provider_1: String::from("Massachusetts Clean Energy Center"),

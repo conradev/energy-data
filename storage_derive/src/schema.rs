@@ -41,12 +41,11 @@ impl Schema {
             .named
             .iter()
             .map(|field| {
-                let mut field = match Field::try_from(field) {
-                    Ok(f) => f,
-                    Err(e) => return Err(e),
-                };
-                field.primary_key = attrs.primary_key.as_ref() == Some(&field.name);
-                Ok(field)
+                let mut field = Field::try_from(field);
+                if let Ok(field) = field.as_mut() {
+                    field.primary_key = attrs.primary_key.as_ref() == Some(&field.name);
+                }
+                field
             })
             .collect();
         let extras = attrs.extras.clone();
@@ -69,7 +68,7 @@ impl Display for Schema {
         let schema_body = self
             .fields
             .iter()
-            .map(|f| format!("    {}", f))
+            .map(|f| format!("    {f}"))
             .collect::<Vec<_>>()
             .join(",\n");
 
@@ -116,10 +115,10 @@ impl Display for Field {
         // name TYPE (PRIMARY KEY) (NOT NULL)
         let field = [name, sql_type, primary_key, nullable]
             .into_iter()
-            .filter_map(|s| s)
+            .flatten()
             .collect::<Vec<_>>()
             .join(" ");
 
-        write!(f, "{}", field)
+        write!(f, "{field}")
     }
 }

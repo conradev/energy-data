@@ -1,0 +1,8 @@
+/target
+.direnv
+.envrc
+.git
+Dockerfile
+
+*.db
+*.csv

@@ -5,6 +5,7 @@ edition = "2021"
 
 [dependencies]
 indicatif = { version = "0.17" }
-rusqlite = { version = "0.28.0", features = ["backup"] }
+chrono = { version = "0.4" }
+rusqlite = { git = "https://github.com/rusqlite/rusqlite.git", branch = "master", features = ["backup", "chrono", "csvtab", "serde_json"] }
 
 storage_derive = { version = "0.1", path = "../storage_derive" }

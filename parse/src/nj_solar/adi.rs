@@ -45,8 +45,8 @@ struct InstallationDef {
 #[serde(transparent)]
 pub struct ADIInstallation(#[serde(with = "InstallationDef")] Installation);
 
-impl Into<Installation> for ADIInstallation {
-    fn into(self) -> Installation {
-        self.0
+impl From<ADIInstallation> for Installation {
+    fn from(val: ADIInstallation) -> Self {
+        val.0
     }
 }

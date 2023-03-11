@@ -12,11 +12,11 @@ impl<'a> Upsert<'a> {
         let params = self.schema.fields.iter().map(|field| {
             let ident = &field.ident;
             quote! {
-                (&self.#ident as &dyn ::rusqlite::ToSql),
+                (&self.#ident as &dyn ::storage::sqlite::ToSql),
             }
         });
         quote! {
-            fn upsert(&self, statement: &mut ::rusqlite::Statement) -> ::rusqlite::Result<()> {
+            fn upsert(&self, statement: &mut ::storage::sqlite::Statement) -> ::storage::sqlite::Result<()> {
                 statement
                     .execute(&[
                         #(#params)*

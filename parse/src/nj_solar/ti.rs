@@ -45,8 +45,8 @@ pub struct InstallationDef {
 #[serde(transparent)]
 pub struct TIInstallation(#[serde(with = "InstallationDef")] Installation);
 
-impl Into<Installation> for TIInstallation {
-    fn into(self) -> Installation {
-        self.0
+impl From<TIInstallation> for Installation {
+    fn from(val: TIInstallation) -> Self {
+        val.0
     }
 }

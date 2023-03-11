@@ -1,5 +1,5 @@
 use anyhow::Result;
-use indicatif::{MultiProgress, ProgressBar};
+use indicatif::{MultiProgress};
 use std::io::{Read, Seek};
 
 pub trait ParseBuffer {

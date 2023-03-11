@@ -1,9 +1,9 @@
-use crate::nj_solar::Parser;
+
 use crate::ParseBuffer;
 use anyhow::Result;
 use glob::Pattern;
 use indicatif::{MultiProgress, ProgressBar, ProgressStyle};
-use std::collections::HashMap;
+
 use std::io::{Cursor, Read, Seek};
 use std::marker::PhantomData;
 
@@ -32,7 +32,7 @@ where
         let mut zip = zip::ZipArchive::new(reader)?;
         let mut records = vec![];
         for idx in 0..zip.len() {
-            let mut file = zip.by_index(idx)?;
+            let file = zip.by_index(idx)?;
 
             let Some(path) = file.enclosed_name() else { continue };
             if !Z::filter().matches_path(path) {

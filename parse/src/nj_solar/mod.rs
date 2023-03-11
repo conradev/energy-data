@@ -2,14 +2,14 @@ use anyhow::Result;
 use calamine::Reader;
 use indicatif::{MultiProgress, ProgressBar, ProgressStyle};
 use std::collections::HashMap;
-use std::io::{Read, Seek, SeekFrom};
+use std::io::{Read, Seek};
 
 mod adi;
 mod srp;
 mod ti;
 mod util;
 
-use crate::excel::ParseSheet;
+
 use crate::util::StreamLength;
 
 pub struct Parser;

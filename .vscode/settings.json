@@ -1,0 +1,26 @@
+{
+    "editor.codeActionsOnSave": {},
+    "files.autoSave": "onFocusChange",
+    "files.defaultLanguage": "rust",
+    "explorer.excludeGitIgnore": true,
+    "git.fetchOnPull": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "files.trimTrailingWhitespace": true,
+    "editor.suggest.preview": true,
+    "editor.acceptSuggestionOnEnter": "smart",
+    "rust-analyzer.restartServerOnConfigChange": true,
+    "rust-analyzer.cargo.features": "all",
+    "[rust]": {
+        "editor.defaultFormatter": "rust-lang.rust-analyzer",
+    },
+    "rust-analyzer.check.overrideCommand": [
+        "cargo",
+        "clippy",
+        "--fix",
+        "--workspace",
+        "--message-format=json",
+        "--all-targets",
+        "--allow-dirty"
+    ],
+}
